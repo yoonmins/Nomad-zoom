@@ -1,0 +1,28 @@
+{
+  "name": "nomad-zoom",
+  "version": "1.0.0",
+  "description": "Zoom Clone using WebRTC and Websockets",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yoonmins/Nomad-zoom.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yoonmins/Nomad-zoom/issues"
+  },
+  "homepage": "https://github.com/yoonmins/Nomad-zoom#readme",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.14.6",
+    "@babel/node": "^7.14.7",
+    "@babel/preset-env": "^7.14.7",
+    "nodemon": "^2.0.12"
+  },
+  "dependencies": {
+    "express": "^4.18.1",
+    "pug": "^3.0.2"
+  }
+}
