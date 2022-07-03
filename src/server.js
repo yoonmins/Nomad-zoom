@@ -1,3 +1,4 @@
+// BE 영역
 import express from "express";
 import http from "http";
 import WebSocket from "ws";
@@ -16,9 +17,13 @@ const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 // http & ws 통합 서버 (http 서버 위에 ws)
 
-function handleConnection(socket){
-    console.log(socket);
-}
-wss.on("connection", handleConnection);
+wss.on("connection", (socket) =>{
+    console.log("Connected to Browser ✓");
+    socket.on("close", () => console.log("Disconneted to Browser ❌"));
+    socket.on("message", (message) => {
+        console.log(message.toString());
+    });
+    socket.send("hello!!");
+});
 
 server.listen(3000, handleListen);
