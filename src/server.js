@@ -17,13 +17,19 @@ const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 // http & ws 통합 서버 (http 서버 위에 ws)
 
+function onSocketClose (){
+    console.log("Disconneted to Browser ❌");
+}
+
+const sockets =[];
+
 wss.on("connection", (socket) =>{
+    sockets.push(socket)
     console.log("Connected to Browser ✓");
-    socket.on("close", () => console.log("Disconneted to Browser ❌"));
+    socket.on("close", onSocketClose);
     socket.on("message", (message) => {
-        console.log(message.toString());
+        sockets.forEach(aSocket => aSocket.send(message.toString()));
     });
-    socket.send("hello!!");
 });
 
 server.listen(3000, handleListen);

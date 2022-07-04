@@ -1,4 +1,6 @@
 // FE 영역
+const messageList = document.querySelector("ul");
+const messageForm = document.querySelector("form");
 const socket = new WebSocket(`ws://${window.location.host}`);
 // socket응 이용해 be로 메세지 연결
 
@@ -7,13 +9,22 @@ socket.addEventListener("open", () => {
 });
 
 socket.addEventListener("message", (message) => {
-    console.log("New message", message.data);
+    const li = document.createElement("li");
+    li.innerText = message.data;
+    messageList.append(li);
 });
 
 socket.addEventListener("close", () => {
     console.log("Disconneted to server ❌");
 });
 
-setTimeout(() => {
-    socket.send("hello from the browser!");
-}, 10000);
+
+function handleSubmit(event){
+    event.preventDefault();
+    const input = messageForm.querySelector("input");
+    socket.send(input.value);
+    input.value ="";
+}
+
+messageForm.addEventListener("submit", handleSubmit);
+
