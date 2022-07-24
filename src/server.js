@@ -16,11 +16,11 @@ const wsServer = SocketIO(httpServer);
 
 wsServer.on("connection", (socket) => {
     socket.on("enter_room", (roomName, done) => {
-        console.log(roomName);
+        socket.onAny((event) => {
+            console.log(`Soket Event ${event}`);
+            done(); 
+        });
         socket.join(roomName);
-        setTimeout(() =>{
-            done();
-        }, 1000);
     });
 });
 
